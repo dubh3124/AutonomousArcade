@@ -148,6 +148,14 @@ describe("Game Hub", () => {
     const container = document.createElement("div");
     renderGameHub(container);
     const badges = container.querySelectorAll(".game-card__status--coming-soon");
-    expect(badges.length).toBeGreaterThanOrEqual(3);
+    expect(badges.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("renders a 'Play Now' badge for available games", () => {
+    const container = document.createElement("div");
+    renderGameHub(container);
+    const badge = container.querySelector(".game-card__status--available");
+    expect(badge).not.toBeNull();
+    expect(badge?.textContent).toBe("Play Now");
   });
 });
