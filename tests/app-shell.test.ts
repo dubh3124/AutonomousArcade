@@ -144,11 +144,11 @@ describe("Game Hub", () => {
     expect(titleTexts).toContain("Living Dungeon Mini");
   });
 
-  it("renders 'Coming Soon' badges", () => {
+  it("renders 'Coming Soon' badges for future games", () => {
     const container = document.createElement("div");
     renderGameHub(container);
     const badges = container.querySelectorAll(".game-card__status--coming-soon");
-    expect(badges.length).toBeGreaterThanOrEqual(2);
+    expect(badges.length).toBeGreaterThanOrEqual(1);
   });
 
   it("renders a 'Play Now' badge for available games", () => {

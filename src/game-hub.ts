@@ -27,7 +27,7 @@ const GAMES: GameSlot[] = [
   {
     title: "Living Dungeon Mini",
     description: "Explore a tiny procedural dungeon. Survive if you can.",
-    status: "coming-soon",
+    status: "available",
     route: "living-dungeon-mini",
   },
 ];

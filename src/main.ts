@@ -10,6 +10,7 @@ import { renderGameHub } from "./game-hub";
 import { renderScoreDisplay } from "./score-display";
 import { renderFooter } from "./footer";
 import { mountReactionRush } from "./reaction-rush/game";
+import { renderDungeonGame } from "./dungeon-ui";
 
 function bootstrap(): void {
   const app = document.getElementById("app");
@@ -33,6 +34,8 @@ function bootstrap(): void {
         playerId,
         onBack: () => navigateToHub(),
       });
+    } else if (route === "living-dungeon-mini" && gameView) {
+      renderDungeonGame(gameView);
     }
   });
 
