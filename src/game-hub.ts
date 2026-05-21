@@ -24,7 +24,7 @@ const PLACEHOLDER_GAMES: GameSlot[] = [
   {
     title: "Living Dungeon Mini",
     description: "Explore a tiny procedural dungeon. Survive if you can.",
-    status: "coming-soon",
+    status: "available",
   },
 ];
 
@@ -66,6 +66,16 @@ function createGameCard(game: GameSlot): HTMLElement {
   badge.textContent =
     game.status === "available" ? "Play Now" : "Coming Soon";
   card.appendChild(badge);
+
+  // Make available games clickable
+  if (game.status === "available") {
+    card.style.cursor = "pointer";
+    card.addEventListener("click", () => {
+      window.dispatchEvent(
+        new CustomEvent("navigate", { detail: game.title })
+      );
+    });
+  }
 
   return card;
 }
