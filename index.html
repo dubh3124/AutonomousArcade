@@ -339,20 +339,26 @@
   </head>
   <body>
     <div id="app">
-      <!-- Player Identity -->
-      <div class="player-identity">
-        <span class="player-identity__label">Player ID:</span>
-        <span id="player-id">Loading...</span>
+      <!-- Shell view: contains the hub, player identity, score display, and footer -->
+      <div id="shell-view">
+        <!-- Player Identity -->
+        <div class="player-identity">
+          <span class="player-identity__label">Player ID:</span>
+          <span id="player-id">Loading...</span>
+        </div>
+
+        <!-- Game Hub -->
+        <div id="game-hub"></div>
+
+        <!-- Score Display -->
+        <div id="score-display"></div>
+
+        <!-- Footer -->
+        <footer id="site-footer"></footer>
       </div>
 
-      <!-- Game Hub -->
-      <div id="game-hub"></div>
-
-      <!-- Score Display -->
-      <div id="score-display"></div>
-
-      <!-- Footer -->
-      <footer id="site-footer"></footer>
+      <!-- Game container: individual games render here -->
+      <div id="game-view" style="display:none;"></div>
     </div>
 
     <script type="module" src="/src/main.ts"></script>

@@ -8,23 +8,27 @@ export interface GameSlot {
   title: string;
   description: string;
   status: "available" | "coming-soon";
+  route: string;
 }
 
-const PLACEHOLDER_GAMES: GameSlot[] = [
+const GAMES: GameSlot[] = [
   {
     title: "Reaction Rush",
     description: "Test your reflexes — click as fast as you can!",
-    status: "coming-soon",
+    status: "available",
+    route: "reaction-rush",
   },
   {
     title: "Word Grid",
     description: "Find words in a grid of letters before time runs out.",
     status: "coming-soon",
+    route: "word-grid",
   },
   {
     title: "Living Dungeon Mini",
     description: "Explore a tiny procedural dungeon. Survive if you can.",
     status: "available",
+    route: "living-dungeon-mini",
   },
 ];
 
@@ -39,7 +43,7 @@ export function renderGameHub(container: HTMLElement): void {
   const grid = document.createElement("div");
   grid.className = "game-hub__grid";
 
-  for (const game of PLACEHOLDER_GAMES) {
+  for (const game of GAMES) {
     const card = createGameCard(game);
     grid.appendChild(card);
   }
@@ -67,12 +71,13 @@ function createGameCard(game: GameSlot): HTMLElement {
     game.status === "available" ? "Play Now" : "Coming Soon";
   card.appendChild(badge);
 
-  // Make available games clickable
   if (game.status === "available") {
     card.style.cursor = "pointer";
     card.addEventListener("click", () => {
       window.dispatchEvent(
-        new CustomEvent("navigate", { detail: game.title })
+        new CustomEvent("navigate", {
+          detail: { route: game.route },
+        })
       );
     });
   }
