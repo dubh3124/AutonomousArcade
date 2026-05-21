@@ -41,6 +41,19 @@ function randPick<T>(arr: T[]): T {
  * Generates a dungeon with guaranteed reachable exit.
  */
 export function generateDungeon(): Dungeon {
+  // Retry until we get a valid dungeon with a reachable exit
+  for (let attempt = 0; attempt < 100; attempt++) {
+    const result = tryGenerateDungeon();
+    const start = findPlayerStart(result);
+    const exit = findExit(result);
+    if (start && exit && canReachExit(result, start, exit)) {
+      return result;
+    }
+  }
+  throw new Error("Failed to generate a valid dungeon after 100 attempts");
+}
+
+function tryGenerateDungeon(): Dungeon {
   const size = randInt(5, 8);
   const width = size;
   const height = size;
