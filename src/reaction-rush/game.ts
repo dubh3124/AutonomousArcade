@@ -119,3 +119,40 @@ export class ReactionRushGame {
     this.container.innerHTML = "";
   }
 }
+
+export interface MountReactionRushOptions {
+  playerId: string;
+  onBack: () => void;
+}
+
+export function mountReactionRush(
+  container: HTMLElement,
+  options: MountReactionRushOptions
+): ReactionRushGame {
+  const game = new ReactionRushGame(container);
+
+  // Add player ID display
+  const playerIdEl = document.createElement("div");
+  playerIdEl.className = "player-identity";
+  playerIdEl.innerHTML = `<span class="player-identity__label">Player ID:</span> <span>${options.playerId}</span>`;
+  container.insertBefore(playerIdEl, container.firstChild);
+
+  // Add back button handler
+  const backBtn = container.querySelector(".reaction-rush__back-btn");
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      game.destroy();
+      options.onBack();
+    });
+  }
+
+  // Wire up the action button click handler
+  const actionBtn = container.querySelector(".reaction-rush__action-btn");
+  if (actionBtn) {
+    actionBtn.addEventListener("click", () => {
+      game.handleClick();
+    });
+  }
+
+  return game;
+}
