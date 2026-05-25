@@ -11,6 +11,7 @@ import { renderScoreDisplay } from "./score-display";
 import { renderFooter } from "./footer";
 import { mountReactionRush } from "./reaction-rush/game";
 import { renderDungeonGame } from "./dungeon-ui";
+import { renderWordGridGame } from "./word-grid/game-ui";
 
 function bootstrap(): void {
   const app = document.getElementById("app");
@@ -29,13 +30,17 @@ function bootstrap(): void {
     if (shellView) shellView.style.display = "none";
     if (gameView) gameView.style.display = "block";
 
-    if (route === "reaction-rush" && gameView) {
+    if (route === "hub") {
+      navigateToHub();
+    } else if (route === "reaction-rush" && gameView) {
       mountReactionRush(gameView, {
         playerId,
         onBack: () => navigateToHub(),
       });
     } else if (route === "living-dungeon-mini" && gameView) {
       renderDungeonGame(gameView);
+    } else if (route === "word-grid" && gameView) {
+      renderWordGridGame(gameView);
     }
   });
 

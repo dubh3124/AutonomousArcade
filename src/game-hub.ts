@@ -21,7 +21,7 @@ const GAMES: GameSlot[] = [
   {
     title: "Word Grid",
     description: "Find words in a grid of letters before time runs out.",
-    status: "coming-soon",
+    status: "available",
     route: "word-grid",
   },
   {
