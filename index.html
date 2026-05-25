@@ -292,6 +292,219 @@
         color: #9090c0;
       }
 
+      /* Word Grid */
+      .word-grid-game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .word-grid-game__header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+      }
+
+      .word-grid-game__back {
+        background: #2a2a4a;
+        color: #c0c0e0;
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: background 0.2s;
+      }
+
+      .word-grid-game__back:hover {
+        background: #3a3a5a;
+      }
+
+      .word-grid-game__title {
+        font-size: 1.6rem;
+        color: #f0f0f0;
+      }
+
+      .word-grid-game__info {
+        display: flex;
+        gap: 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .word-grid-game__score {
+        color: #6fcf6f;
+      }
+
+      .word-grid-game__timer {
+        color: #e04ef0;
+      }
+
+      .word-grid-game__player-id {
+        font-size: 0.85rem;
+        color: #9090c0;
+        word-break: break-all;
+      }
+
+      .word-grid-game__grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        border: 2px solid #2a2a4a;
+        border-radius: 8px;
+        padding: 0.5rem;
+        background: #141428;
+      }
+
+      .word-grid-row {
+        display: flex;
+        gap: 0.25rem;
+        justify-content: center;
+      }
+
+      .word-grid-cell {
+        width: 60px;
+        height: 60px;
+        font-size: 1.4rem;
+        font-weight: 700;
+        background: #1a1a2e;
+        color: #e0e0e0;
+        border: 2px solid #2a2a4a;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s, transform 0.1s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .word-grid-cell:hover {
+        background: #2a2a4a;
+        border-color: #6c63ff;
+      }
+
+      .word-grid-cell--selected {
+        background: #2a3a5a;
+        border-color: #6c63ff;
+        transform: scale(1.05);
+      }
+
+      .word-grid-game__input-area {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .word-grid-game__word-display {
+        width: 100%;
+        min-height: 2rem;
+        font-size: 1.3rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-align: center;
+        background: #1a1a2e;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        color: #6c63ff;
+      }
+
+      .word-grid-game__message {
+        width: 100%;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #9090c0;
+        min-height: 1.3rem;
+      }
+
+      .word-grid-game__submit-btn {
+        background: #6fcf6f;
+        color: #0f0f1a;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .word-grid-game__submit-btn:hover {
+        background: #5ab85a;
+      }
+
+      .word-grid-game__submit-btn:disabled {
+        background: #3a3a5a;
+        color: #707090;
+        cursor: not-allowed;
+      }
+
+      .word-grid-game__new-game-btn {
+        background: #6c63ff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .word-grid-game__new-game-btn:hover {
+        background: #5a52e0;
+      }
+
+      .word-grid-game__word-list {
+        background: #1a1a2e;
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .word-grid-game__word-list h3 {
+        font-size: 1rem;
+        color: #c0c0e0;
+        margin-bottom: 0.5rem;
+      }
+
+      .word-grid-game__word-list p {
+        color: #9090c0;
+        font-size: 0.9rem;
+        word-break: break-word;
+      }
+
+      .word-grid-game__history {
+        background: #1a1a2e;
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      .word-grid-game__history h3 {
+        font-size: 1rem;
+        color: #c0c0e0;
+        margin-bottom: 0.5rem;
+      }
+
+      .word-grid-game__history-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        font-size: 0.9rem;
+        color: #9090c0;
+      }
+
       /* Score Display */
       .score-display {
         display: flex;
