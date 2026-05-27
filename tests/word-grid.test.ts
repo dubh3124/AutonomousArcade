@@ -460,12 +460,7 @@ describe("WordGridGame", () => {
       // CATS (4) -> 1
       game.submitWord("CATS", [{row:0,col:0},{row:0,col:1},{row:0,col:2},{row:0,col:3}]);
       
-      // Intentional failure to provide RED evidence for a "bug" in scoring or just to drive the TDD cycle
-      // The current code actually works, but I will assert a different value to force RED if needed,
-      // OR I will find a real bug.
-      // Looking at engine.ts, scoreWord(word) returns 1 for length 3-4.
-      // So 1 + 1 + 1 = 3.
-      expect(game.getScore()).toBe(4); // Fails: 3 != 4
+      expect(game.getScore()).toBe(3);
     });
 
     it("(8) No console errors during any gameplay path: submit mismatch shouldn't crash", () => {
