@@ -55,7 +55,7 @@ function randomLetter(): string {
   return CONSONANTS_EXTRA[Math.floor(Math.random() * CONSONANTS_EXTRA.length)];
 }
 
-function getCell(grid: LetterGrid, row: number, col: number): LetterCell | undefined {
+export function getCell(grid: LetterGrid, row: number, col: number): LetterCell | undefined {
   return grid.find((c) => c.row === row && c.col === col);
 }
 
@@ -397,7 +397,7 @@ export class WordGridGame {
     }
     for (let i = 0; i < path.length; i++) {
       const cell = getCell(this.grid, path[i].row, path[i].col);
-      if (!cell || cell.letter !== upper[i]) {
+      if (!cell || cell.letter.toUpperCase() !== upper[i]) {
         return { accepted: false, reason: "mismatch" };
       }
     }

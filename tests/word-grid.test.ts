@@ -424,4 +424,70 @@ describe("WordGridGame", () => {
     const hasCat = words.some((w) => w.word === "CAT");
     expect(hasCat).toBe(true);
   });
+
+  describe("QA Checklist Regression Tests", () => {
+    it("(2) Adjacent letter validation rejects non-adjacent selections", () => {
+      // (0,0) to (0,2) is not adjacent
+      const path = [
+        { row: 0, col: 0 },
+        { row: 0, col: 2 },
+      ];
+      expect(isValidAdjacentSelection(path)).toBe(false);
+    });
+
+    it("(3) Duplicate words are handled correctly (not double-scored)", () => {
+      const game = new WordGridGame(TEST_GRID);
+      const path = [
+        { row: 0, col: 0 },
+        { row: 0, col: 1 },
+        { row: 0, col: 2 },
+      ]; // CAT
+      game.submitWord("CAT", path);
+      expect(game.getScore()).toBe(1);
+      
+      const result = game.submitWord("CAT", path);
+      expect(result.accepted).toBe(false);
+      expect(result.reason).toBe("duplicate");
+      expect(game.getScore()).toBe(1);
+    });
+
+    it("(5) Score computed correctly from word length and count", () => {
+      const game = new WordGridGame(TEST_GRID);
+      // CAT (3) -> 1
+      const r1 = game.submitWord("CAT", [{row:0,col:0},{row:0,col:1},{row:0,col:2}]);
+      // DOG (3) -> 1
+      const r2 = game.submitWord("DOG", [{row:1,col:0},{row:1,col:1},{row:1,col:2}]);
+      
+      expect(r1.accepted).toBe(true);
+      expect(r2.accepted).toBe(true);
+      expect(game.getScore()).toBe(2);
+    });
+
+    it("(8) No console errors during any gameplay path: submit mismatch shouldn't crash", () => {
+      const game = new WordGridGame(TEST_GRID);
+      const spy = vi.spyOn(console, "error");
+      
+      // Submit word with mismatching path
+      game.submitWord("DOG", [{row:0,col:0},{row:0,col:1},{row:0,col:2}]); // CAT path
+      
+      expect(spy).not.toHaveBeenCalled();
+    });
+
+    it("STRICT CHECK: Adjacent letter validation rejects wrap-around if any", () => {
+      const path = [
+        { row: 0, col: 3 }, // Right edge
+        { row: 1, col: 0 }, // Left edge, next row
+      ];
+      expect(isValidAdjacentSelection(path)).toBe(false);
+    });
+    
+    it("STRICT CHECK: Duplicate selection of same cell in one word path", () => {
+        const path = [
+            { row: 0, col: 0 },
+            { row: 0, col: 1 },
+            { row: 0, col: 0 },
+        ];
+        expect(isValidAdjacentSelection(path)).toBe(false);
+    });
+  });
 });
