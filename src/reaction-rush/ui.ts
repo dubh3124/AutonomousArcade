@@ -83,9 +83,27 @@ export function renderReactionRush(
 
   arena.appendChild(message);
 
+  // Hidden hit area for mobile/rapid clicking ease
+  const hitArea = document.createElement("div");
+  hitArea.className = "reaction-rush__hit-area";
+  hitArea.style.position = "absolute";
+  hitArea.style.top = "0";
+  hitArea.style.left = "0";
+  hitArea.style.width = "100%";
+  hitArea.style.height = "100%";
+  hitArea.style.zIndex = "1";
+  hitArea.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (phase === "waiting" || phase === "ready") {
+      callbacks.onReact(0); // This is intercepted by game.handleClick
+    }
+  });
+  arena.appendChild(hitArea);
+
   // Action button
   const actionBtn = document.createElement("button");
   actionBtn.className = "reaction-rush__action-btn";
+  actionBtn.style.zIndex = "2";
 
   if (phase === "idle") {
     actionBtn.textContent = "Start";
