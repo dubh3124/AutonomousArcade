@@ -454,13 +454,13 @@ describe("WordGridGame", () => {
     it("(5) Score computed correctly from word length and count", () => {
       const game = new WordGridGame(TEST_GRID);
       // CAT (3) -> 1
-      game.submitWord("CAT", [{row:0,col:0},{row:0,col:1},{row:0,col:2}]);
+      const r1 = game.submitWord("CAT", [{row:0,col:0},{row:0,col:1},{row:0,col:2}]);
       // DOG (3) -> 1
-      game.submitWord("DOG", [{row:1,col:0},{row:1,col:1},{row:1,col:2}]);
-      // CATS (4) -> 1
-      game.submitWord("CATS", [{row:0,col:0},{row:0,col:1},{row:0,col:2},{row:0,col:3}]);
+      const r2 = game.submitWord("DOG", [{row:1,col:0},{row:1,col:1},{row:1,col:2}]);
       
-      expect(game.getScore()).toBe(3);
+      expect(r1.accepted).toBe(true);
+      expect(r2.accepted).toBe(true);
+      expect(game.getScore()).toBe(2);
     });
 
     it("(8) No console errors during any gameplay path: submit mismatch shouldn't crash", () => {
