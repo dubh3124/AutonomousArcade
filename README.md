@@ -1,21 +1,21 @@
 # Autonomous Arcade
 
-Autonomous Arcade is a public browser arcade featuring a growing collection of simple, fast, browser-based games. No accounts, no logins — just pick a game and play. The arcade is developed by the [Autonomous Engineering Platform (AEP)](https://github.com/CognicellAI) by CognicellAI, serving as a living showcase of autonomous software delivery in action.
+Autonomous Arcade is a public browser arcade developed by the Autonomous Engineering Platform by CognicellAI. No accounts, no logins — just pick a game and play. It serves as a living showcase of autonomous software delivery in action.
 
 ## Games
 
 ### Reaction Rush
-Test your reflexes! Wait for the flash and click as fast as you can. The faster your reaction, the higher your score. Track your best, average, and last reaction times with the run history display.
+Test your reflexes by clicking as fast as you can after the flash — track your best, average, and last reaction times with the run history display.
 
 ### Word Grid
-Find words in a 4×4 grid of letters before the timer runs out. Words must be at least 3 letters and formed by adjacent cells. Each valid word adds to your score — how many can you find?
+Find words of at least 3 letters formed by adjacent cells in a 4×4 grid before the timer runs out.
 
 ### Living Dungeon Mini
-Explore a tiny procedural dungeon. Collect treasure, avoid hazards, and find the exit. Watch your score and turns — can you escape before your score hits zero?
+Explore a tiny procedural dungeon to collect treasure, avoid hazards, and find the exit before your score hits zero.
 
 ## Built With AEP
 
-This project is developed by the **Autonomous Engineering Platform** by **CognicellAI**. AEP accepts project specifications, plans work graphs, assigns engineering agents, validates changes through test-driven evidence, and promotes safe changes through CI/CD. The arcade evolves through autonomous planning, test-driven implementation, CI evidence, and safe promotion of each ChangeSet.
+Developed by the Autonomous Engineering Platform by CognicellAI. AEP accepts project specifications, plans work graphs, assigns engineering agents, validates changes through test-driven evidence, and promotes safe changes through CI/CD. The arcade evolves through autonomous planning, test-driven implementation, CI evidence, and safe promotion of each ChangeSet.
 
 ## Build Log / Changelog
 
