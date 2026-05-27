@@ -213,7 +213,7 @@ export function renderDungeonGame(container: HTMLElement): void {
     if (gameOver) return;
 
     const result = movePlayer(game, dir);
-    if (result.moved || getStatus(game) !== "playing") {
+    if (result.moved) {
       renderGrid();
       updateInfo();
       renderHistory();

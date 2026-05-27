@@ -103,10 +103,7 @@ function tryGenerateDungeon(): Dungeon {
         ny < height &&
         !visited.has(`${nx},${ny}`)
       ) {
-        // 70% chance to continue carving to create more open space
-        if (Math.random() < 0.7) {
-          carve(nx, ny);
-        }
+        carve(nx, ny);
       }
     }
   }
@@ -165,9 +162,8 @@ function tryGenerateDungeon(): Dungeon {
   // Fallback: if no reachable exit found (shouldn't happen with our carving),
   // set exit to the farthest reachable empty cell
   if (!exitPos) {
-    // Just pick any remaining empty cell - we carved from start so all should be reachable
-    exitPos = randPick(remainingEmpty);
-    cells[exitPos.y][exitPos.x] = "exit";
+    // If we can't find a reachable exit, throw to trigger a retry in generateDungeon
+    throw new Error("No reachable exit found");
   }
 
   // Place treasures and hazards on remaining empty cells
