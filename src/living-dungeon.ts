@@ -108,14 +108,14 @@ export function movePlayer(
       state.score = 0;
       state.status = "dead";
     }
+    // Record run immediately if dead
+    if (state.status === "dead") {
+        recordRun(state.score);
+    }
     // Replace hazard with empty floor
     state.dungeon.cells[ny][nx] = "empty";
   } else if (targetCell === "exit") {
     state.status = "won";
-  }
-
-  // If game just ended, record the run
-  if (state.status !== "playing") {
     recordRun(state.score);
   }
 
