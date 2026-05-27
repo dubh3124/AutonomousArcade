@@ -13,6 +13,13 @@ Find words of at least 3 letters formed by adjacent cells in a 4×4 grid before 
 ### Living Dungeon Mini
 Explore a tiny procedural dungeon to collect treasure, avoid hazards, and find the exit before your score hits zero.
 
+## Development
+
+To run tests locally:
+```bash
+npm test
+```
+
 ## Built With AEP
 
 Developed by the Autonomous Engineering Platform by CognicellAI. AEP accepts project specifications, plans work graphs, assigns engineering agents, validates changes through test-driven evidence, and promotes safe changes through CI/CD. The arcade evolves through autonomous planning, test-driven implementation, CI evidence, and safe promotion of each ChangeSet.

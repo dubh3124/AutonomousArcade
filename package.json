@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "packageManager": "npm@10.9.2",
   "description": "Autonomous Arcade – a public browser arcade developed by the Autonomous Engineering Platform by CognicellAI",
   "scripts": {
     "dev": "vite",
