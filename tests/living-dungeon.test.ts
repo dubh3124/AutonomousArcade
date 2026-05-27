@@ -107,6 +107,127 @@ describe("Dungeon Generation", () => {
       expect(hazardCount).toBeGreaterThanOrEqual(1);
     }
   });
+});
+
+describe("Game QA: Edge Cases and Bugs", () => {
+  it("QA: every generated dungeon HAS a reachable exit (1000 trials)", () => {
+    for (let i = 0; i < 1000; i++) {
+      const dungeon = generateDungeon();
+      const start = findPlayerStart(dungeon);
+      const exit = findExit(dungeon);
+      expect(start).not.toBeNull();
+      expect(exit).not.toBeNull();
+      expect(canReachExit(dungeon, start!, exit!)).toBe(true);
+    }
+  });
+
+  it("QA: movement is correctly constrained to grid boundaries", () => {
+    const dungeon: Dungeon = {
+      width: 3,
+      height: 3,
+      cells: [
+        ["player", "empty", "exit"],
+        ["empty", "empty", "empty"],
+        ["empty", "empty", "empty"],
+      ]
+    };
+
+    const state = {
+      dungeon,
+      playerPos: { x: 0, y: 0 },
+      score: 0,
+      turns: 0,
+      status: "playing" as any
+    };
+
+    // Try moving UP and LEFT from (0,0)
+    let res = movePlayer(state, "up");
+    expect(res.moved).toBe(false);
+    expect(state.playerPos).toEqual({ x: 0, y: 0 });
+
+    res = movePlayer(state, "left");
+    expect(res.moved).toBe(false);
+    expect(state.playerPos).toEqual({ x: 0, y: 0 });
+
+    // Move to (2,2) and try moving RIGHT and DOWN
+    state.playerPos = { x: 2, y: 2 };
+    res = movePlayer(state, "right");
+    expect(res.moved).toBe(false);
+    expect(state.playerPos).toEqual({ x: 2, y: 2 });
+
+    res = movePlayer(state, "down");
+    expect(res.moved).toBe(false);
+    expect(state.playerPos).toEqual({ x: 2, y: 2 });
+  });
+
+  it("QA: treasure encounters correctly add score", () => {
+    const dungeon: Dungeon = {
+      width: 3,
+      height: 3,
+      cells: [
+        ["player", "treasure", "exit"],
+        ["empty", "empty", "empty"],
+        ["empty", "empty", "empty"],
+      ]
+    };
+    const state = {
+      dungeon,
+      playerPos: { x: 0, y: 0 },
+      score: 0,
+      turns: 0,
+      status: "playing" as any
+    };
+
+    movePlayer(state, "right");
+    expect(state.score).toBe(10);
+    expect(state.dungeon.cells[0][1]).toBe("empty");
+  });
+
+  it("QA: hazard encounters reduce score and end run if score < 0", () => {
+    const dungeon: Dungeon = {
+      width: 3,
+      height: 2,
+      cells: [
+        ["player", "hazard", "empty"],
+        ["empty", "hazard", "exit"],
+      ]
+    };
+    const state = {
+      dungeon,
+      playerPos: { x: 0, y: 0 },
+      score: 0, // Start with 0
+      turns: 0,
+      status: "playing" as any
+    };
+
+    // Encountering hazard at 0 score should kill player
+    movePlayer(state, "right");
+    expect(state.status).toBe("dead");
+    expect(state.score).toBe(0);
+  });
+
+  it("QA: run history shows correct best/average/last", () => {
+    clearRunHistory();
+    recordRun(10);
+    recordRun(30);
+    recordRun(20);
+
+    const history = getRunHistory();
+    expect(history.lastScore).toBe(20);
+    expect(history.bestScore).toBe(30);
+    expect(history.averageScore).toBe(20); // (10+30+20)/3 = 20
+  });
+});
+
+      let hazardCount = 0;
+      for (let y = 0; y < dungeon.height; y++) {
+        for (let x = 0; x < dungeon.width; x++) {
+          if (dungeon.cells[y][x] === "hazard") hazardCount++;
+        }
+      }
+      expect(hazardCount).toBeGreaterThanOrEqual(1);
+    }
+  });
 
   it("does not place player start on top of exit", () => {
     for (let i = 0; i < 20; i++) {
