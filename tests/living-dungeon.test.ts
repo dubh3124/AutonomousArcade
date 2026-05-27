@@ -219,6 +219,10 @@ describe("Game QA: Edge Cases and Bugs", () => {
   });
 });
 
+describe("Dungeon Generation Extended", () => {
+  it("places at least one hazard on the grid", () => {
+    for (let i = 0; i < 20; i++) {
+      const dungeon = generateDungeon();
       let hazardCount = 0;
       for (let y = 0; y < dungeon.height; y++) {
         for (let x = 0; x < dungeon.width; x++) {

@@ -103,10 +103,7 @@ function tryGenerateDungeon(): Dungeon {
         ny < height &&
         !visited.has(`${nx},${ny}`)
       ) {
-        // 70% chance to continue carving to create more open space
-        if (Math.random() < 0.7) {
-          carve(nx, ny);
-        }
+        carve(nx, ny);
       }
     }
   }
