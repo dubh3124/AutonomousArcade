@@ -152,7 +152,7 @@ export function renderReactionRush(
   backBtn.textContent = "← Back to Arcade";
   backBtn.addEventListener("click", () => {
     // Dispatch a custom event so the app shell can handle navigation
-    window.dispatchEvent(new CustomEvent("navigate", { detail: { view: "hub" } }));
+    window.dispatchEvent(new CustomEvent("navigate", { detail: { route: "hub" } }));
   });
   container.appendChild(backBtn);
 }

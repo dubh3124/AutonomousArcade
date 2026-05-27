@@ -58,7 +58,7 @@ export function renderDungeonGame(container: HTMLElement): void {
   backBtn.textContent = "← Back to Hub";
   backBtn.addEventListener("click", () => {
     // Dispatch a custom event for the app shell to handle routing
-    window.dispatchEvent(new CustomEvent("navigate", { detail: "hub" }));
+    window.dispatchEvent(new CustomEvent("navigate", { detail: { route: "hub" } }));
   });
   header.appendChild(backBtn);
 

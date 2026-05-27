@@ -31,4 +31,8 @@ See the [Build Log / Changelog](docs/build-log.md) for a record of AEP-delivered
 - Testable game logic where practical.
 - Visible project history through commits, pull requests, and CI checks.
 
+## Public Deployment
+
+The arcade is deployed at **[https://dubh3124.github.io/AutonomousArcade](https://dubh3124.github.io/AutonomousArcade)** via GitHub Pages.
+
 See [docs/project-brief.md](docs/project-brief.md) for the initial product brief.
