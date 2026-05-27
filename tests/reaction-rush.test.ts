@@ -12,6 +12,7 @@ import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
 import {
   computeScore,
   createRunHistory,
+  clearRunHistory,
   recordRun,
   randomDelayMs,
   measureReaction,
@@ -25,6 +26,9 @@ import { renderReactionRush, type GamePhase } from "../src/reaction-rush/ui";
 // ---------------------------------------------------------------------------
 
 describe("Reaction Rush – Logic", () => {
+  beforeEach(() => {
+    clearRunHistory();
+  });
   // -- computeScore --
   describe("computeScore", () => {
     it("returns 1000 for a 0ms reaction", () => {
@@ -89,6 +93,7 @@ describe("Reaction Rush – Logic", () => {
       let history = createRunHistory();
       history = recordRun(history, 200);
       history = recordRun(history, 400);
+      // (200 + 400) / 2 = 300
       expect(history.averageMs).toBe(300);
     });
 
@@ -295,6 +300,7 @@ describe("Reaction Rush – UI", () => {
   describe("run history display", () => {
     it("displays best, average, and last times from history", () => {
       let history = createRunHistory();
+      // Use recordRun to build history with _reactionSum
       history = recordRun(history, 300);
       history = recordRun(history, 200);
       history = recordRun(history, 400);
@@ -352,6 +358,7 @@ describe("Reaction Rush – Game Controller", () => {
   // We test the game controller indirectly by mocking timers
   beforeEach(() => {
     vi.useFakeTimers();
+    clearRunHistory();
   });
 
   afterEach(() => {

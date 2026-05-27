@@ -22,7 +22,11 @@ export interface RunHistory {
   averageMs: number | null;
   /** Last reaction time in ms, or null if no runs */
   lastMs: number | null;
+  /** Internal: sum of reactions for average calculation */
+  _reactionSum?: number;
 }
+
+const STORAGE_KEY = "autonomous-arcade-reaction-rush-history";
 
 /** Creates an empty run history */
 export function createRunHistory(): RunHistory {
@@ -31,7 +35,42 @@ export function createRunHistory(): RunHistory {
     bestMs: null,
     averageMs: null,
     lastMs: null,
+    _reactionSum: 0,
   };
+}
+
+/** Loads run history from localStorage */
+export function loadRunHistory(): RunHistory {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      return {
+        runs: parsed.runs || [],
+        bestMs: parsed.bestMs ?? null,
+        averageMs: parsed.averageMs ?? null,
+        lastMs: parsed.lastMs ?? null,
+        _reactionSum: parsed._reactionSum ?? 0,
+      };
+    }
+  } catch (e) {
+    console.error("Failed to load history from localStorage:", e);
+  }
+  return createRunHistory();
+}
+
+/** Saves run history to localStorage */
+export function saveRunHistory(history: RunHistory): void {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+  } catch (e) {
+    console.error("Failed to save history to localStorage:", e);
+  }
+}
+
+/** Clears run history from localStorage */
+export function clearRunHistory(): void {
+  localStorage.removeItem(STORAGE_KEY);
 }
 
 /**
@@ -55,12 +94,12 @@ export function recordRun(history: RunHistory, reactionMs: number): RunHistory {
   const result: RunResult = { reactionMs, score };
   const runs = [...history.runs, result];
 
-  const times = runs.map((r) => r.reactionMs);
-  const bestMs = Math.min(...times);
-  const averageMs = Math.round(times.reduce((a, b) => a + b, 0) / times.length);
+  const bestMs = history.bestMs === null ? reactionMs : Math.min(history.bestMs, reactionMs);
+  const _reactionSum = (history._reactionSum || 0) + reactionMs;
+  const averageMs = Math.round(_reactionSum / runs.length);
   const lastMs = reactionMs;
 
-  return { runs, bestMs, averageMs, lastMs };
+  return { runs, bestMs, averageMs, lastMs, _reactionSum };
 }
 
 /**

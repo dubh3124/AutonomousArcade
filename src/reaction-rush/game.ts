@@ -7,6 +7,8 @@
 
 import {
   createRunHistory,
+  loadRunHistory,
+  saveRunHistory,
   recordRun,
   randomDelayMs,
   measureReaction,
@@ -30,7 +32,7 @@ export class ReactionRushGame {
 
   constructor(container: HTMLElement) {
     this.container = container;
-    this.history = createRunHistory();
+    this.history = loadRunHistory();
     this.phase = "idle";
     this.stimulusTime = 0;
     this.timeoutId = null;
@@ -72,6 +74,7 @@ export class ReactionRushGame {
         const clickTime = performance.now();
         const reactionMs = measureReaction(this.stimulusTime, clickTime);
         this.history = recordRun(this.history, reactionMs);
+        saveRunHistory(this.history);
         this.phase = "clicked";
         this.render();
         break;
@@ -149,7 +152,16 @@ export function mountReactionRush(
   // Wire up the action button click handler
   const actionBtn = container.querySelector(".reaction-rush__action-btn");
   if (actionBtn) {
-    actionBtn.addEventListener("click", () => {
+    actionBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      game.handleClick();
+    });
+  }
+
+  const hitArea = container.querySelector(".reaction-rush__hit-area");
+  if (hitArea) {
+    hitArea.addEventListener("click", (e) => {
+      e.stopPropagation();
       game.handleClick();
     });
   }
