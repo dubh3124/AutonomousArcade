@@ -396,8 +396,8 @@ export class WordGridGame {
       return { accepted: false, reason: "mismatch" };
     }
     for (let i = 0; i < path.length; i++) {
-      const cell = getCell(this.grid, path[i].row, path[i].col);
-      if (!cell || cell.letter !== upper[i]) {
+      const cell = this.grid.find((c) => c.row === path[i].row && c.col === path[i].col);
+      if (!cell || cell.letter.toUpperCase() !== upper[i]) {
         return { accepted: false, reason: "mismatch" };
       }
     }
