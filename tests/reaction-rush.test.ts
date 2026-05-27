@@ -337,7 +337,7 @@ describe("Reaction Rush – UI", () => {
 
       expect(handler).toHaveBeenCalledTimes(1);
       const event = handler.mock.calls[0][0] as CustomEvent;
-      expect(event.detail.view).toBe("hub");
+      expect(event.detail.route).toBe("hub");
 
       window.removeEventListener("navigate", handler);
     });
