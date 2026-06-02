@@ -42,6 +42,7 @@ export function renderReactionRush(
   header.className = "reaction-rush__header";
 
   const title = document.createElement("h1");
+  title.className = "reaction-rush__title";
   title.textContent = "Reaction Rush";
   header.appendChild(title);
 
@@ -130,6 +131,7 @@ export function renderReactionRush(
   historySection.className = "reaction-rush__history";
 
   const historyTitle = document.createElement("h2");
+  historyTitle.className = "reaction-rush__history-title";
   historyTitle.textContent = "Run History";
   historySection.appendChild(historyTitle);
 
