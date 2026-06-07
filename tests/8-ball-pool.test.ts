@@ -1,6 +1,50 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { PoolGame } from '../src/8-ball-pool/game';
 
+// Mock Phaser
+vi.mock('phaser', () => {
+    const Scene = class {
+        scene: any;
+        scale: any;
+        add: any;
+        input: any;
+        constructor(key: string) {
+            this.scene = { key, start: vi.fn(), getScenes: vi.fn() };
+            this.scale = { width: 1024, height: 576 };
+            this.add = {
+                text: vi.fn().mockReturnValue({ setOrigin: vi.fn() }),
+                rectangle: vi.fn(),
+                circle: vi.fn(),
+            };
+            this.input = { on: vi.fn() };
+        }
+    };
+
+    return {
+        default: {
+            Scene,
+            Game: class {
+                config: any;
+                scene: any;
+                constructor(config: any) {
+                    this.config = config;
+                    this.scene = {
+                        getScenes: vi.fn().mockReturnValue([{ scene: { key: 'MenuScene' } }]),
+                        start: vi.fn()
+                    };
+                }
+                destroy() {}
+            },
+            AUTO: 0,
+            Scale: {
+                FIT: 0,
+                CENTER_BOTH: 1
+            },
+            Types: {}
+        }
+    };
+});
+
 describe('8-Ball Pool Game', () => {
     let container: HTMLElement;
 
